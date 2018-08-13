@@ -1,47 +1,40 @@
 import React from "react";
-import { Modal, Form, Checkbox } from "antd";
+import { Form, Input } from "antd";
 import debugModule from "debug";
-
-import Wrapper from "./Wrapper";
 
 const debug = debugModule("antd-form-demos:EditForm");
 const FormItem = Form.Item;
 
-const EditForm = Form.create({
-  mapPropsToFields(props) {
-    const formValues = {};
-    formValues.foo = Form.createFormField({
-      value: false
-    });
-    formValues.bar = Form.createFormField({
-      value: false
-    });
-    return formValues;
-  }
-})(props => {
-  debug("mapPropsToFields()()", props);
-  const { onCancel, onSubmit, form } = props;
-  const { getFieldDecorator } = form;
-  return (
-    <Modal
-      className="afd-dialog"
-      visible={true}
-      title="Antd Form Demo Dialog"
-      okText="Submit"
-      onCancel={onCancel}
-      onOk={onSubmit}
-      width={800}
-    >
+class EditForm extends Component {
+  render() {
+    debug("render()", this.props);
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
+    return (
       <Form layout="vertical">
-        <FormItem className="afd-checkbox" label="">
-          {getFieldDecorator("foo", {
-            valuePropName: "checked"
-          })(<Checkbox />)}
+        <FormItem label="foo">
+          {getFieldDecorator("foo", {})(<Input />)}
         </FormItem>
-        <Wrapper getFieldDecorator={getFieldDecorator} />
+        <FormItem label="bar">
+          {getFieldDecorator("bar", {})(<Input />)}
+        </FormItem>
       </Form>
-    </Modal>
-  );
-});
+    );
+  }
+}
 
-export default EditForm;
+const WrappedEditForm = Form.create({
+  mapPropsToFields(props) {
+    debug("mapPropsToFields(props=?)", props);
+    return {
+      foo: Form.createFormField({
+        value: "foo"
+      }),
+      bar: Form.createFormField({
+        value: ""
+      })
+    };
+  }
+})(EditForm);
+
+export default WrappedEditForm;
