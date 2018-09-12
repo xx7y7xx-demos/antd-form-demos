@@ -9,11 +9,11 @@ const debug = debugModule("antd-form-demos:App");
 
 class App extends Component {
   state = {
-    parent: ''
-  }
-  handleChange = event => this.setState({ parent: event.target.value })
+    parent: ""
+  };
+  handleChange = event => this.setState({ parent: event.target.value });
   render() {
-    debug('render()', this.props)
+    debug("render()", this.props);
     return (
       <div className="App">
         <header className="App-header">
