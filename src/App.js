@@ -3,7 +3,7 @@ import debugModule from "debug";
 
 import logo from "./logo.svg";
 import "./App.css";
-import EditForm from "./EditForm";
+import PoiForm from "./PoiForm";
 
 const debug = debugModule("antd-form-demos:App");
 
@@ -24,7 +24,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <h1>POI Form</h1>
-        <EditForm />
+        <PoiForm />
       </div>
     );
   }
